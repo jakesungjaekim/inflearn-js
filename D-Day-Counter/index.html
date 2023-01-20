@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>D-day-counter</title>
+    <link rel="stylesheet" href="./index.css">
+    <script>
+        const dateFormMaker = function() {
+            const inputYear = document.querySelector('#target-year-input').value;
+            const inputMonth = document.querySelector('#target-month-input').value
+            const inputDay = document.querySelector('#target-day-input').value
+
+            
+            // console.log(inputYear, inputMonth, inputDay )
+            // const dateFormat = inputYear + '-' + inputMonth + '-' + inputDay
+            const dateFormat = `${inputYear}-${inputMonth}-${inputDay}` // 템플릿 리터럴 
+        
+             return dateFormat;
+        }
+
+        const counterMake = function() {
+            const targetDateInput = dateFormMaker()
+            const nowDate = new Date()
+            const targetDate = new Date(targetDateInput).setHours(0,0,0,0)
+            const remaining = (targetDate - nowDate) / 1000
+
+            const remainingDate = Math.floor(remaining / 3600 / 24) 
+            const remainingHour = Math.floor(remaining / 3600 ) % 24
+            const remainingMin = Math.floor(remaining / 60) % 60
+            const remainingSec = Math.floor(remaining) % 60
+
+            console.log(remainingDate, remainingHour, remainingMin, remainingSec)
+
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="target-year-input" class="target-input"/>
+        <input type="text" id="target-month-input" class="target-input"/>
+        <input type="text" id="target-day-input" class="target-input"/>
+        <button onclick="counterMake()">버튼</button>
+    </div>
+</body>
+</html>
