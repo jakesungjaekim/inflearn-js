@@ -23,6 +23,15 @@
             const targetDate = new Date(targetDateInput).setHours(0,0,0,0)
             const remaining = (targetDate - nowDate) / 1000
 
+            if(remaining <= 0) {
+                // 만약 remainning이 
+                console.log('타이머가 종료되었습니다.')
+            } else if(isNaN(remaining)) {
+                // 만약 잘못된 날짜가 들어왔다면, 유효한 시간대가 아닙니다 출력
+                console.log('유효한 시간대가 아닙니다')
+
+            }
+
             const remainingDate = Math.floor(remaining / 3600 / 24) 
             const remainingHour = Math.floor(remaining / 3600 ) % 24
             const remainingMin = Math.floor(remaining / 60) % 60
@@ -36,10 +45,25 @@
 </head>
 <body>
     <div class="container">
-        <input type="text" id="target-year-input" class="target-input"/>
-        <input type="text" id="target-month-input" class="target-input"/>
-        <input type="text" id="target-day-input" class="target-input"/>
-        <button onclick="counterMake()">버튼</button>
+        <div class="wrapper">
+            <h1>D-Day</h1>
+            <div class="d-day">
+                <span id="time days">0</span>
+                <span id="day">일</span>
+                <span id="time hours">0</span>
+                <span id="day">시간</span>
+                <span id="time min">0</span>
+                <span id="day">분</span>
+                <span id="time sec">0</span>
+                <span id="day">초</span>
+            </div>
+            <div class="selector">
+                <input type="text" id="target-year-input" class="target-input"/> -
+                <input type="text" id="target-month-input" class="target-input"/> -
+                <input type="text" id="target-day-input" class="target-input"/>
+            </div>
+            <button onclick="counterMake()">카운트다운 시작</button>
+        </div>
     </div>
 </body>
 </html>
