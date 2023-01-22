@@ -1,69 +1,37 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <title>D-day-counter</title>
-    <link rel="stylesheet" href="./index.css">
-    <script>
-        const dateFormMaker = function() {
-            const inputYear = document.querySelector('#target-year-input').value;
-            const inputMonth = document.querySelector('#target-month-input').value
-            const inputDay = document.querySelector('#target-day-input').value
-
-            
-            // console.log(inputYear, inputMonth, inputDay )
-            // const dateFormat = inputYear + '-' + inputMonth + '-' + inputDay
-            const dateFormat = `${inputYear}-${inputMonth}-${inputDay}` // 템플릿 리터럴 
-        
-             return dateFormat;
-        }
-
-        const counterMake = function() {
-            const targetDateInput = dateFormMaker()
-            const nowDate = new Date()
-            const targetDate = new Date(targetDateInput).setHours(0,0,0,0)
-            const remaining = (targetDate - nowDate) / 1000
-
-            if(remaining <= 0) {
-                // 만약 remainning이 
-                console.log('타이머가 종료되었습니다.')
-            } else if(isNaN(remaining)) {
-                // 만약 잘못된 날짜가 들어왔다면, 유효한 시간대가 아닙니다 출력
-                console.log('유효한 시간대가 아닙니다')
-
-            }
-
-            const remainingDate = Math.floor(remaining / 3600 / 24) 
-            const remainingHour = Math.floor(remaining / 3600 ) % 24
-            const remainingMin = Math.floor(remaining / 60) % 60
-            const remainingSec = Math.floor(remaining) % 60
-
-            console.log(remainingDate, remainingHour, remainingMin, remainingSec)
-
-        }
-
-    </script>
-</head>
-<body>
-    <div class="container">
-        <div class="wrapper">
-            <h1>D-Day</h1>
-            <div class="d-day">
-                <span id="time days">0</span>
-                <span id="day">일</span>
-                <span id="time hours">0</span>
-                <span id="day">시간</span>
-                <span id="time min">0</span>
-                <span id="day">분</span>
-                <span id="time sec">0</span>
-                <span id="day">초</span>
-            </div>
-            <div class="selector">
-                <input type="text" id="target-year-input" class="target-input"/> -
-                <input type="text" id="target-month-input" class="target-input"/> -
-                <input type="text" id="target-day-input" class="target-input"/>
-            </div>
-            <button onclick="counterMake()">카운트다운 시작</button>
-        </div>
+  <head>
+    <title>D-Day</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index.js" defer></script>
+  </head>
+  <body>
+    <h1>D-Day</h1>
+    <div id="d-day-container">
+      <div class="d-day-child-container">
+        <span id="days">0</span>
+        <span>일</span>
+      </div>
+      <div class="d-day-child-container">
+        <span id="hours">0</span>
+        <span>시간</span>
+      </div>
+      <div class="d-day-child-container">
+        <span id="min">0</span>
+        <span>분</span>
+      </div>
+      <div class="d-day-child-container">
+        <span id="sec">0</span>
+        <span>초</span>
+      </div>
     </div>
-</body>
+    <div id="d-day-message"></div>
+    <div id="target-selector id">
+      <input id="target-year-input" class="target-input" size="5" /> -
+      <input id="target-month-input" class="target-input" size="5" /> -
+      <input id="target-date-input" class="target-input" size="5" />
+    </div>
+    <button onclick="starter()" class="btn">카운트다운 시작</button>
+    <button onclick="resetTimer()" class="btn">타이머 초기화</button>
+  </body>
 </html>
