@@ -1,7 +1,6 @@
 const messageContainer = document.querySelector('#d-day-message');
 const container = document.querySelector('#d-day-container');
 const savedDate = localStorage.getItem('saved-date');
-
 const intervalIdArr = [];
 
 const dateFormMaker = function () {
@@ -15,13 +14,17 @@ const dateFormMaker = function () {
   return dateFormat;
 };
 
+// counterMaker()는 매개변수가 'saved-date'가 아니면 다시 새롭게 저장해준다.
+
 const counterMaker = function (data) {
   if (data !== savedDate) {
     localStorage.setItem('saved-date', data);
   }
-  
+
   const nowDate = new Date();
   const targetDate = new Date(data).setHours(0, 0, 0, 0);
+
+  //remaining => 날짜 계산
   const remaining = (targetDate - nowDate) / 1000;
   if (remaining <= 0) {
     // 만약, remaining이 0이라면, 타이머가 종료되었습니다. 출력
@@ -39,6 +42,7 @@ const counterMaker = function (data) {
     return;
   }
 
+  //remainingObj는 날/시/분/초 계산
   const remainingObj = {
     remainingDate: Math.floor(remaining / 3600 / 24),
     remainingHours: Math.floor(remaining / 3600) % 24,
@@ -49,6 +53,7 @@ const counterMaker = function (data) {
   const documentArr = ['days', 'hours', 'min', 'sec'];
   const timeKeys = Object.keys(remainingObj);
 
+  // format()는 10초 이하일 때 문자열 0 을 붙여주는 함수
   const format = function (time) {
     if (time < 10) {
       return '0' + time;
@@ -69,9 +74,12 @@ const starter = function (targetDateInput) {
   if (!targetDateInput) {
     targetDateInput = dateFormMaker();
   }
+
   container.style.display = 'flex';
   messageContainer.style.display = 'none';
+
   setClearInterval();
+
   counterMaker(targetDateInput);
   const intervalId = setInterval(() => {
     counterMaker(targetDateInput);
